@@ -1,11 +1,22 @@
 <?php
 
 
-Route::get('/', function () {
-    $posts= App\Post::latest('published_at')->get();
-    return view('welcome',compact('posts'));
+Route::get('/', 'PagesController@home');
+
+
+
+Route::group(['prefix'=> 'admin',
+            'namespace'=>'Admin', 
+            'middleware'=>'auth'],
+function(){
+    Route::get('/','AdminController@index')->name('dashboard');
+    Route::get('posts','PostsController@index')->name('admin.posts.index');
+    Route::get('posts/create','PostsController@create')->name('admin.posts.create');
+    Route::post('posts','PostsController@store')->name('admin.posts.store');
+    
 });
 
-Route::get('admin',function(){
-    return view('admin.dashboard');
-});
+Route::auth();
+
+
+
