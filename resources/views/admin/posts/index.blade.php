@@ -11,9 +11,10 @@
 @endsection
 @section('content')
     <h1>Dashboard</h1>
-    <div class="box">
+    <div class="box box-primary">
         <div class="box-header">
             <h3 class="box-title">Listado de publicaciones</h3>
+            <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Crear publicación</button>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -33,7 +34,8 @@
                         <td>{{$post->title}}</td>
                         <td>{{$post->excerpt}}</td>
                         <td>
-                            <a href="#" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></a>
+                            <a href="{{route('posts.show',$post)}} " target="_blank" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
+                            <a href="{{route('admin.posts.edit',$post)}}" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></a>
                             <a href="#" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                         </td>
                     </tr>
@@ -67,4 +69,5 @@
             });
         });
     </script>
+    
 @endpush
